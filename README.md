@@ -1,23 +1,27 @@
-# applenote
+# note
 
 #### 介绍
 网络笔记本项目
 
 #### 软件架构
-软件架构说明
+SpringBoot版本：2.1.6.RELEASE
+
+MySQL版本：5.7.17
 
 
 #### 安装教程
 
-1. xxxx
-2. xxxx
-3. xxxx
+1. 创建application-dev.properties配置数据库连接信息
+2. 创建数据库并导入数据结构note.sql
+3. 启动：
+    本地：建议使用IDEA打开项目，运行启动类
+    
+    服务器部署：执行启动脚本start.sh，脚本文件在doc中。
+    注意：需要修改static/scripts/basepath.js中的根路径为当前服务器的IP
+    var basepath="http://localhost:8086/note";换掉localhost
 
 #### 使用说明
-
-1. xxxx
-2. xxxx
-3. xxxx
+    本地访问登录页：http://localhost:8086/note/login
 
 #### 参与贡献
 

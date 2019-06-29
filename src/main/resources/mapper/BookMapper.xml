@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- BookDAO接口对应的查询语句 -->
+<mapper namespace="com.note.apple.dao.BookDAO">
+		<!-- 根据用户id查询笔记本信息 -->
+	<select id="findByUserId" parameterType="string" resultType="com.note.apple.entity.Book">
+		SELECT 
+			cn_notebook_id,
+			cn_user_id,
+			cn_notebook_type_id,
+			cn_notebook_name,
+			cn_notebook_desc,
+			cn_notebook_createtime
+		FROM 
+			cn_notebook 
+		WHERE 
+			cn_user_id=#{userId}
+	</select>
+		<!-- 新建笔记本 -->
+	<insert id="save" parameterType="com.note.apple.entity.Book">
+		INSERT 
+			cn_notebook(
+				cn_notebook_id,
+				cn_user_id,
+				cn_notebook_type_id,
+				cn_notebook_name,
+				cn_notebook_createtime) 
+		VALUES
+			(#{cn_notebook_id},
+			#{cn_user_id},
+			'5',
+			#{cn_notebook_name},
+			#{cn_notebook_createtime})
+	
+	</insert>
+	
+</mapper>
+
+
+

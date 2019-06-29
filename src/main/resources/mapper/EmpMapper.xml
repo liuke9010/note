@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- UserDAO接口对应的查询语句 -->
+<mapper namespace="com.note.apple.dao.UserDAO">
+	<!-- 根据用户名查询用户信息 -->
+	<select id="findByName" parameterType="string" resultType="com.note.apple.entity.User">
+		SELECT*
+		FROM cn_user 
+		WHERE cn_user_name=#{name}
+	</select>
+	<!-- 新增用户（注册）,以对象的方式传值 -->
+	<insert id="save" parameterType="com.note.apple.entity.User" >
+		INSERT INTO cn_user(cn_user_id,cn_user_name,cn_user_password,cn_user_nick)
+		 VALUES(#{cn_user_id},#{cn_user_name},#{cn_user_password},#{cn_user_nick})
+	</insert>
+</mapper>
+
+

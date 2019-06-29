@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- NoteDAO接口对应的查询语句 ，笔记相关操作-->
+<mapper namespace="com.note.apple.dao.NoteDAO">
+	<!-- 根据用户id查询笔记信息 -->
+	<select id="findByBookId" parameterType="string" resultType="com.note.apple.entity.Note">
+		SELECT
+			 cn_note_id,
+			 cn_note_title,
+			 cn_note_type_id
+		FROM 
+			cn_note 
+		WHERE 
+			cn_notebook_id=#{bookId} 
+		AND 
+			cn_note_status_id='1'
+	</select>
+	<!-- 根据笔记id查询笔记内容-->
+	<select id="findById" parameterType="string" resultType="com.note.apple.entity.Note">
+		SELECT*
+		FROM cn_note
+		WHERE cn_note_id=#{id} 
+	</select>
+	<!-- 更新笔记-->
+	<update id="updateNote" parameterType="com.note.apple.entity.Note" >
+		UPDATE cn_note 
+		SET cn_note_title=#{cn_note_title},
+			cn_note_body=#{cn_note_body},
+			cn_note_last_modify_time=#{cn_note_last_modify_time}
+		WHERE cn_note_id=#{cn_note_id}
+	</update>
+	<!-- 新建笔记 -->
+	<insert id="save" parameterType="com.note.apple.entity.Note">
+		INSERT INTO cn_note
+			(cn_note_id,cn_notebook_id,cn_user_id,cn_note_status_id,
+			cn_note_type_id,cn_note_title,cn_note_body,cn_note_create_time,
+			cn_note_last_modify_time)
+		VALUES
+			(#{cn_note_id},#{cn_notebook_id},#{cn_user_id},
+			'1','1',#{cn_note_title},'',#{cn_note_create_time},
+			#{cn_note_last_modify_time})
+	</insert>
+	<!-- 删除笔记(其实是放入回收站) -->
+	<update id="updateStatus">
+		UPDATE cn_note
+		SET cn_note_status_id='2'
+		WHERE cn_note_id=#{cn_note_id}
+	</update>
+	<!-- 移动笔记本，实际上是修改所属笔记本的id -->
+	<update id="updateBookId" parameterType="com.note.apple.entity.Note">
+		UPDATE cn_note
+		SET cn_notebook_id=#{cn_notebook_id}
+		WHERE cn_note_id=#{cn_note_id}
+	</update>
+	<!-- 更新已分享状态 -->	
+	<update id="updateTypeId" parameterType="string">
+		UPDATE cn_note
+		SET cn_note_type_id='2'
+		WHERE cn_note_id=#{noteId}
+	</update>
+	<!-- 组合查询 -->
+	<select id="findNotes" parameterType="map" resultType="com.note.apple.entity.Note">
+		SELECT*
+		FROM cn_note
+		<where>
+		<if test="title!=null">
+		cn_note_title like #{title}
+		</if>
+		<if test="status!=null">
+		AND cn_note_status_id like #{status}
+		</if>
+		<if test="begin!=null">
+		AND cn_note_create_time &gt;#{begin}
+		</if>
+		<if test="end!=null">
+		AND cn_note_create_time &lt;#{end}
+		</if>
+		</where>
+	</select>
+	<!-- 动态更新 -->
+	<update id="dynamicUpdate">
+		UPDATE cn_note
+		<set>
+			<if test="title!=null">
+				cn_note_title=#{cn_note_title},
+			</if>
+		</set>
+	
+	</update>
+	<!-- in条件 -->
+	<delete id="batchDelete">
+		DELETE FROM cn_note
+		WHERE cn_note_id 
+		IN
+		<foreach collection="array" item="id" separator="," open="(" close=")">
+		
+		
+		</foreach>
+	</delete>
+</mapper>
+
+
+

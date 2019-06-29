@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- ShareDAO接口对应的查询语句 ，笔记相关操作-->
+<mapper namespace="com.note.apple.dao.ShareDAO">
+	<!--根据笔记id查找-->
+	<insert id="save" parameterType="com.note.apple.entity.Note">
+		INSERT INTO cn_share
+		 (cn_share_id,cn_share_title,cn_share_body,cn_note_id)
+		VALUES(#{cn_share_id},#{cn_share_title},#{cn_share_body},#{cn_note_id})
+	</insert>
+	<!--搜索笔记-->
+	<select id="findLikeTitle" parameterType="map" resultType="com.note.apple.entity.Share">
+		SELECT cn_share_id,cn_share_title,cn_share_body,cn_note_id
+		FROM cn_share
+		WHERE cn_share_title like #{keyword}
+		LIMIT #{begin},5
+	</select>
+	<!-- 显示搜索列表的笔记详细信息 -->
+	<select id="findById" parameterType="string" resultType="com.note.apple.entity.Share">
+		SELECT cn_share_title,cn_share_body
+		FROM cn_share
+		WHERE cn_share_id=#{shareId}
+	</select>
+	
+	
+	
+</mapper>
+
+
+

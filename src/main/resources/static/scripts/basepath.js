@@ -1,0 +1,1 @@
+var basepath="http://localhost:8086/note";
