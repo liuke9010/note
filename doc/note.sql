@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 29/06/2019 19:48:29
+ Date: 30/06/2019 01:03:27
 */
 
 SET NAMES utf8mb4;
@@ -25,7 +25,7 @@ CREATE TABLE `cn_activity`  (
   `cn_activity_id` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '活动ID',
   `cn_activity_title` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '活动标题',
   `cn_activity_body` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '活动介绍(html片段)',
-  `cn_activity_end_time` bigint(20) NULL DEFAULT NULL COMMENT '活动结束时间',
+  `cn_activity_end_time` timestamp(0) NULL DEFAULT NULL COMMENT '活动结束时间',
   PRIMARY KEY (`cn_activity_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -55,8 +55,8 @@ CREATE TABLE `cn_note`  (
   `cn_note_type_id` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '笔记本类型ID：备用',
   `cn_note_title` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '笔记标题',
   `cn_note_body` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '笔记内容',
-  `cn_note_create_time` bigint(20) NULL DEFAULT NULL COMMENT '笔记创建时间',
-  `cn_note_last_modify_time` bigint(20) NULL DEFAULT NULL COMMENT '笔记最近修改时间',
+  `cn_note_create_time` timestamp(0) NULL DEFAULT NULL COMMENT '笔记创建时间',
+  `cn_note_last_modify_time` timestamp(0) NULL DEFAULT NULL COMMENT '笔记最近修改时间',
   PRIMARY KEY (`cn_note_id`) USING BTREE,
   INDEX `FK_Reference_2`(`cn_notebook_id`) USING BTREE,
   INDEX `FK_Reference_3`(`cn_user_id`) USING BTREE,

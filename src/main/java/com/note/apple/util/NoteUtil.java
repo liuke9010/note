@@ -2,6 +2,8 @@ package com.note.apple.util;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Random;
 import java.util.UUID;
 
 import org.apache.commons.codec.binary.Base64;
@@ -18,9 +20,16 @@ public class NoteUtil {
 	 * @return
 	 */
 	public static String createId() {
-		UUID uuid=UUID.randomUUID();
+//		UUID uuid=UUID.randomUUID();
 		//随机生成id并将其转换成字符串,将-替换为空
-		return uuid.toString().replace("-", "");
+//		return uuid.toString().replace("-", "");
+
+        //根据当前时间生成ID
+		String rule = "yyyyMMdd";
+        SimpleDateFormat sdf = new SimpleDateFormat(rule);
+        String id = sdf.format(System.currentTimeMillis())+new Random().nextInt(99999);
+
+		return id;
 	}
 	
 	/**

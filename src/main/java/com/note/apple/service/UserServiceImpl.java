@@ -6,10 +6,11 @@ import com.note.apple.entity.User;
 import com.note.apple.error.BusinessException;
 import com.note.apple.error.EnumBusinessError;
 import com.note.apple.util.NoteUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//扫描
+@Slf4j
 @Service("userService")
 public class UserServiceImpl implements UserService {
 	//登录
@@ -23,6 +24,7 @@ public class UserServiceImpl implements UserService {
 		if(user==null) {
 			result.setStatus(1);
 			result.setMsg("用户名不存在");
+			log.info("用户{}不存在！",name);
 			return result;
 		}
 		//判断密码
@@ -36,6 +38,7 @@ public class UserServiceImpl implements UserService {
 			if(!user.getCn_user_password().equals(md5_pwd)) {
 				result.setStatus(2);
 				result.setMsg("密码错误");
+                log.info("用户{}密码错误",name);
 				return result;
 			}
 		} catch (Exception e) {
@@ -48,6 +51,7 @@ public class UserServiceImpl implements UserService {
 		result.setMsg("登陆成功");
 		user.setCn_user_password("");//把密码屏蔽不返回
 		result.setData(user);//返回user信息
+        log.info("用户{}登陆成功！",name);
 		return result;
 	}
 	
@@ -59,6 +63,7 @@ public class UserServiceImpl implements UserService {
 		if(has_user!=null) {
 			result.setStatus(1);
 			result.setMsg("用户名已被占用");
+			log.info("用户{}已存在！",name);
 			return result;
 		}
 		
@@ -78,7 +83,7 @@ public class UserServiceImpl implements UserService {
 		user.setCn_user_id(userId);//设置用户id
 		userDAO.save(user);
 		//创建返回结果
-		
+		log.info("用户{}注册成功！",name);
 		result.setStatus(0);
 		result.setMsg("注册成功");
 		
