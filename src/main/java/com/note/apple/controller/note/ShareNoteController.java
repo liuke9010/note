@@ -3,7 +3,6 @@ package com.note.apple.controller.note;
 import javax.annotation.Resource;
 import com.note.apple.data.NoteResult;
 import com.note.apple.service.NoteService;
-import com.sun.xml.internal.bind.v2.TODO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
