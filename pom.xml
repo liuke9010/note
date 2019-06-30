@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.note</groupId>
-    <artifactId>apple</artifactId>
+    <artifactId>note</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>note</name>
     <description>note project for Spring Boot</description>

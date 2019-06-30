@@ -20,6 +20,6 @@ public class ShareNoteController {
 		NoteResult result=noteService.shareNote(noteId);
 		return result;
 	}
-	//TODO
+	//TODO  其他功能待补充
 
 }
